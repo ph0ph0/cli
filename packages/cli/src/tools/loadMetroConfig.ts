@@ -15,11 +15,6 @@ function resolveSymlinksForRoots(roots: string[]): string[] {
   );
 }
 
-function getWatchFolders(): string[] {
-  const root = process.env.REACT_NATIVE_APP_ROOT;
-  return root ? resolveSymlinksForRoots([path.resolve(root)]) : [];
-}
-
 const INTERNAL_CALLSITES_REGEX = new RegExp(
   [
     '/Libraries/Renderer/implementations/.+\\.js$',
@@ -56,7 +51,6 @@ export interface MetroConfig {
     assetRegistryPath: string;
     assetPlugins?: Array<string>;
   };
-  watchFolders: string[];
   reporter?: any;
 }
 
@@ -106,7 +100,6 @@ export const getDefaultConfig = (ctx: Config): MetroConfig => {
         'Libraries/Image/AssetRegistry',
       ),
     },
-    watchFolders: getWatchFolders(),
   };
 };
 
